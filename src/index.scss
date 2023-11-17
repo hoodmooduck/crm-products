@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+html, body, #root, .wrapper{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-y: scroll;
+  padding: 20px 20px 20px 500px;
+  background: #E9E9E9;
+  &::-webkit-scrollbar{
+    position: absolute;
+    width: 0px;
+    height: 0px;
+  }
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: "Inter";
+  box-sizing: border-box;
+}
+
+.disabledButton-UI{
+  width: 100%;
+  padding: 10px 0px;
+  max-width: 318px;
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid #C6BDBD;
+  background: #C6BDBD;
+  align-items: center;
+  justify-content: center;
+  .button-UI_text{
+      color: #FFF;
+      text-align: center;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+  }
+
+  &:hover{
+    cursor: default;
+  }
+}

@@ -1,0 +1,62 @@
+.sidebar{
+    position: fixed;
+    left: 0px;
+    max-width: 480px;
+    min-width: 480px;
+    height: 100vh;
+    overflow-y: scroll;
+    background: #fff;
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    padding: 35px 25px;
+    gap: 30px;
+    &::-webkit-scrollbar{
+        position: absolute;
+        width: 0px;
+        height: 0px;
+    }
+    .sidebar-title{
+        color: #000;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-align: center;
+    }
+    .sidebar-text{
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 31px;
+        .inp-class{
+            width: 100%;
+            &:focus{
+                outline: none;
+                border-radius: 3px;
+                border: 2px solid #406FE9;
+                background: #FFF;
+                box-shadow: 2px 4px 4px 0px rgba(64, 111, 233, 0.25);
+            }
+        }
+        textarea {
+            resize: none;
+            height: 168px;
+        }
+        input{
+            padding: 7px 5px;
+            border-radius: 3px;
+            border: 1px solid #C6BDBD;
+            background: #FFF;
+            box-shadow: 2px 4px 4px 0px rgba(198, 189, 189, 0.25);
+
+        }
+    }
+}
