@@ -1,12 +1,11 @@
-// взять id объекта заусунть его в один слайс, затем после нажатия на кнопку сохранить изменения 
-// нужно будет пройтись Array.filter() по всему доступному массиву и заменить элемент 
-// Array.filter(el => el.id === id)
 import { ChangeEvent, useEffect, useState } from 'react'
 import AddProductButton from '../../UI/addProduct/addProduct.tsx'
+import RemoveProductButton from '../../UI/removeProduct/removeProduct.tsx'
 import './sidebar.scss'
 // @ts-ignore
-import { addProducts, getAllProducts } from '../../modules/api.js';
-import { useDispatch } from 'react-redux';
+import { addProducts, changeProducts, getAllProducts } from '../../modules/api.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProduct } from '../../modules/getProducts.js';
 
 
 
@@ -16,14 +15,15 @@ function Sidebar() {
     const [description, setDescritption] = useState('')
     const [validate, setValidtate] = useState(false)
     const dispatch = useDispatch()
+    const productSelected = useSelector((state) => state.products.selectProd);
 
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileInputChange = (e) => {
       e.preventDefault()
-      const file = event.target.files[0];
+      const file = e.target.files[0];
       setSelectedFile(file);
-      console.log(event.target.files[0]);
+      console.log(e.target.files[0]);
     };
 
     const productData = {
@@ -31,6 +31,14 @@ function Sidebar() {
         price: parseInt(price),
         description: description,
         image: selectedFile
+    }
+
+    const productData_selected = {
+        id: productSelected?.id,
+        title: name,
+        price: parseInt(price),
+        description: description,
+        image: productSelected?.image
     }
 
     const changeName = (e) => {
@@ -50,6 +58,26 @@ function Sidebar() {
             setValidtate(true)
         }
     },[name, price])
+    useEffect(()=>{
+        if(productSelected !== null){
+            setName(productSelected.title)
+            setDescritption(productSelected.description)
+            setSelectedFile(null)
+            setPrice(productSelected.price)
+        }else{
+            setName('')
+            setDescritption('')
+            setSelectedFile(null)
+            setPrice('')
+        }
+    },[productSelected])
+    function removeProduct(dis) {
+        dis(changeProducts(productData_selected))
+        resetProducts(dispatch)
+    }
+    function selectProd(dis) {
+        dis(selectProduct(null))
+    }
     function resetProducts(dis) {
         dis(getAllProducts())
     }
@@ -63,7 +91,7 @@ function Sidebar() {
         <div className="sidebar">
             <span className='sidebar-title'>Добавление товара</span>
             <span className='sidebar-text'>Заполните все обязательные поля с *</span>
-            <form action="/" method="post">
+            <form action="/" method={productSelected === null ? "put" : "post"}>
                 <input 
                     onChange={changeName}
                     value={name} 
@@ -83,8 +111,8 @@ function Sidebar() {
                 <input 
                     onChange={handleFileInputChange}
                     className='inp-class'
-                    type="file" id="sidebar-img" />
-
+                    type="file" id="sidebar-img" 
+                />
                 <textarea 
                     value={description}
                     onChange={changeDescription}
@@ -92,7 +120,21 @@ function Sidebar() {
                     placeholder='Описание товара'
                 >
                 </textarea>
-                <AddProductButton onClick={()=> addProduct(dispatch)} disabled={!validate ? true : false}></AddProductButton>
+                <AddProductButton 
+                onClick=
+                {
+                    productSelected !== null ?
+                    ()=>removeProduct(dispatch)
+                    :
+                    ()=> addProduct(dispatch)
+                } 
+                disabled={!validate ? true : false}
+                text={productSelected !== null ? 'Редактировать товар' : 'Добавить товар'}
+                />
+                <RemoveProductButton
+                    disabled={productSelected !== null ? false : true}
+                    onClick={()=> selectProd(dispatch)}
+                />
             </form>
         </div>
     )

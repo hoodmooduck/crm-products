@@ -30,6 +30,18 @@ export const addProducts = (productData) => {
   }
 };
 
+export const changeProducts = (productData) => {
+  return async function(dispatch) {
+    try {
+      await axios.put('http://localhost:3030/api/products', productData, {headers});
+      dispatch(setProducts(productData));
+    } catch (error) {
+      console.error('\nошибка: ', error.message, ' \nкод: ', error.code);
+      dispatch(setProducts([]))
+    }
+  }
+};
+
 export const deleteProducts = (id) => {
   return async function(dispatch) {
     try {
