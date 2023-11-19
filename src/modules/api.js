@@ -25,7 +25,7 @@ export const addProducts = (productData) => {
       dispatch(setProducts(productData));
     } catch (error) {
       console.error('\nошибка: ', error.message, ' \nкод: ', error.code);
-      dispatch(setProducts([]))
+      // dispatch(setProducts([]))
     }
   }
 };

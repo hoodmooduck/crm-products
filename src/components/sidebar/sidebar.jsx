@@ -53,6 +53,13 @@ function Sidebar() {
         setDescritption(e.target.value)
     }
 
+    const clearForm = () => {
+        setName('')
+        setDescritption('')
+        setSelectedFile(null)
+        setPrice('')
+    }
+
     useEffect(()=>{
         if(name !== '' && price !==''){
             setValidtate(true)
@@ -65,21 +72,21 @@ function Sidebar() {
             setSelectedFile(null)
             setPrice(productSelected.price)
         }else{
-            setName('')
-            setDescritption('')
-            setSelectedFile(null)
-            setPrice('')
+            clearForm()
         }
     },[productSelected])
     function removeProduct(dis) {
         dis(changeProducts(productData_selected))
         resetProducts(dispatch)
+        clearForm()
+        selectProd(dispatch)
     }
     function selectProd(dis) {
         dis(selectProduct(null))
     }
     function resetProducts(dis) {
         dis(getAllProducts())
+        clearForm()
     }
     function addProduct(dis) {
         dis(addProducts(productData))
