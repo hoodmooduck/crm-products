@@ -3,9 +3,9 @@ import AddProductButton from '../../UI/addProduct/addProduct.tsx'
 import RemoveProductButton from '../../UI/removeProduct/removeProduct.tsx'
 import './sidebar.scss'
 // @ts-ignore
-import { addProducts, changeProducts, getAllProducts } from '../../modules/api.js';
+import { addProducts, changeProducts, getAllProducts } from '../../store/api.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProduct } from '../../modules/getProducts.js';
+import { selectProduct } from '../../store/getProducts.js';
 
 
 
@@ -23,7 +23,7 @@ function Sidebar() {
       e.preventDefault()
       const file = e.target.files[0];
       setSelectedFile(file);
-      console.log(e.target.files[0]);
+
     };
 
     const productData = {
@@ -38,7 +38,7 @@ function Sidebar() {
         title: name,
         price: parseInt(price),
         description: description,
-        image: productSelected?.image
+        image: selectedFile
     }
 
     const changeName = (e) => {
@@ -79,7 +79,7 @@ function Sidebar() {
         dis(changeProducts(productData_selected))
         resetProducts(dispatch)
         clearForm()
-        selectProd(dispatch)
+        selectProd(dispatch )
     }
     function selectProd(dis) {
         dis(selectProduct(null))
@@ -98,35 +98,48 @@ function Sidebar() {
         <div className="sidebar">
             <span className='sidebar-title'>Добавление товара</span>
             <span className='sidebar-text'>Заполните все обязательные поля с *</span>
-            <form action="/" method={productSelected === null ? "put" : "post"}>
-                <input 
-                    onChange={changeName}
-                    value={name} 
-                    className='inp-class'
-                    type="text" 
-                    placeholder='Название*' 
-                    id="sidebar-name"
-                />
-                <input 
-                    onChange={changePrice}
-                    value={price}
-                    className='inp-class' 
-                    type="number" 
-                    placeholder='Цена*' 
-                    id="sidebar-price" 
-                />
-                <input 
-                    onChange={handleFileInputChange}
-                    className='inp-class'
-                    type="file" id="sidebar-img" 
-                />
-                <textarea 
-                    value={description}
-                    onChange={changeDescription}
-                    className='inp-class'
-                    placeholder='Описание товара'
-                >
-                </textarea>
+            <form className='sidebar-form' action="/" method={productSelected === null ? "put" : "post"}>
+            <div className="sidebar-form__string">
+                    <input 
+                        onChange={changeName}
+                        value={name}
+                        className='sidebar-input' 
+                        type="text" 
+                        id="sidebar-name" 
+                        required
+                    />
+                 <label className='sidebar-label' htmlFor="sidebar-name">Название*</label>  
+                </div>
+                <div className="sidebar-form__string">
+                    <input 
+                        onChange={changePrice}
+                        value={price}
+                        className='sidebar-input' 
+                        type="number" 
+                        id="sidebar-price" 
+                        required
+                    />
+                    <label htmlFor="sidebar-price">Цена*</label>
+                </div>
+                <div className="sidebar-form__string">
+                    <input 
+
+                        onChange={handleFileInputChange}
+                        className='sidebar-input__file'
+                        type="file" 
+                        id="sidebar-img" 
+                    />
+                    <label htmlFor="sidebar-price">{selectedFile? selectedFile.name : 'Фото '}</label>
+                </div>
+                <div className="sidebar-form__string">
+                    <textarea 
+                        value={description}
+                        onChange={changeDescription}
+                        className='sidebar-textarea'
+                        required
+                    />
+                    <label htmlFor="sidebar-price">Описание товара</label>
+                </div>
                 <AddProductButton 
                 onClick=
                 {

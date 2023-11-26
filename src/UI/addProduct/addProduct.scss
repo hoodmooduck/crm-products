@@ -1,14 +1,15 @@
-.button-UI_addPr{
+.button-UI{
     width: 100%;
     padding: 10px 0px;
     max-width: 318px;
     border-radius: 3px;
-    border: 1px solid #406FE9;
-    background: #406FE9;
+    border: 1px solid var(--blue);
+    background: var(--blue);
     display: flex;
     align-items: center;
     justify-content: center;
-    .button-UI_text{
+    transition: 0.5s;
+    &_text{
         color: #FFF;
         text-align: center;
         font-size: 20px;
@@ -18,7 +19,7 @@
     }
     &:hover{
         border: 1px solid transparent;
-        background: rgba(64, 111, 233, 0.85);
+        background: var(--blue-hover);
         cursor: pointer;
     }
 }

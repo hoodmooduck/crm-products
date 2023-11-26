@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+:root{
+  --background-wrapper: #E9E9E9;
+  --buttonUI-disabled: #C6BDBD;
+  --shadow-input-focus: #406fe940;
+  --blue: #406FE9;
+  --blue-hover: #406fe9d9;
+  --red: #F23C3C;
+  --red-hover: #f23c3cd9;
+  
+
+}
+
 html, body, #root, .wrapper{
   width: 100%;
   height: 100%;
@@ -8,13 +20,7 @@ html, body, #root, .wrapper{
 
 .wrapper{
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
-  overflow-y: scroll;
-  padding: 20px 20px 20px 500px;
-  background: #E9E9E9;
+  background: var(--background-wrapper);
   &::-webkit-scrollbar{
     position: absolute;
     width: 0px;
@@ -27,16 +33,17 @@ html, body, #root, .wrapper{
   padding: 0px;
   font-family: "Inter";
   box-sizing: border-box;
+  position: relative;
 }
 
-.disabledButton-UI{
+.button-UI__disabled{
   width: 100%;
   padding: 10px 0px;
   max-width: 318px;
   display: flex;
   border-radius: 3px;
-  border: 1px solid #C6BDBD;
-  background: #C6BDBD;
+  border: 1px solid var(--buttonUI-disabled);
+  background: var(--buttonUI-disabled);
   align-items: center;
   justify-content: center;
   .button-UI_text{

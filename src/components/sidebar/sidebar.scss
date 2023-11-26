@@ -1,5 +1,7 @@
+
+
 .sidebar{
-    position: fixed;
+    position: sticky;
     left: 0px;
     max-width: 480px;
     min-width: 480px;
@@ -16,7 +18,37 @@
         width: 0px;
         height: 0px;
     }
-    .sidebar-title{
+   
+    &-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 31px;
+        &__string{
+            width: 100%;
+        }
+        label{
+            top: 5px;
+            left: 5px;
+            z-index: 12;
+            position: absolute;
+        }
+        input:focus + label,input:valid + label, 
+        textarea:focus + label,textarea:valid + label {
+            transform: translateY(-25px);
+        }
+        input{
+            padding: 7px 5px;
+            border-radius: 3px;
+            border: 1px solid var(--buttonUI-disabled);
+            background: #FFF;
+            box-shadow: 2px 4px 4px 0px rgba(198, 189, 189, 0.25);
+        }
+    }
+
+
+
+    &-title{
         color: #000;
         font-size: 25px;
         font-style: normal;
@@ -24,39 +56,53 @@
         line-height: normal;
         text-align: center;
     }
-    .sidebar-text{
+    &-text{
         color: #000;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
     }
-    form{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 31px;
-        .inp-class{
-            width: 100%;
-            &:focus{
-                outline: none;
-                border-radius: 3px;
-                border: 2px solid #406FE9;
-                background: #FFF;
-                box-shadow: 2px 4px 4px 0px rgba(64, 111, 233, 0.25);
-            }
-        }
-        textarea {
-            resize: none;
-            height: 168px;
-        }
-        input{
-            padding: 7px 5px;
+    &-input, &-input__file, &-textarea{
+        width: 100%;
+        
+        &:focus{
+            outline: none;
             border-radius: 3px;
-            border: 1px solid #C6BDBD;
+            border: 2px solid var(--blue);
+            background: #FFF;
+            box-shadow: 2px 4px 4px 0px var(--shadow-input-focus);
+        }
+    }
+    &-input__file{
+        opacity: 0;
+        margin: 0px;
+        position: relative;
+        z-index: 15;
+        &:valid + label{
+            width: 100%;
+            padding: 7px 5px;
+            transform: translateY(0px) translateX(-5px) !important;
+            display: inline-block;
+            border-radius: 3px;
+            border: 1px solid var(--buttonUI-disabled);
             background: #FFF;
             box-shadow: 2px 4px 4px 0px rgba(198, 189, 189, 0.25);
-
+            &::after{
+                content: '';
+                width: 19px;
+                height: 19px;
+                position: absolute;
+                display: inline-block;
+                right: 5px;
+                background: url(../../assets/img/icons/addFile.svg) no-repeat 100%;
+            }
         }
+
+    }
+    &-textarea{
+        width: 100%;
+        resize: none;
+        height: 168px;
     }
 }

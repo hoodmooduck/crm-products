@@ -26,9 +26,15 @@ function CardProduct({props, changeProduct, deleteProduct}: cardPropsInterface) 
             <div className="cardProduct-img">
                 <img src={props.image !== '' ? props.image : noImg} alt={props.title} />
             </div>
-            <div className="cardProduct-title bold">{props.title}</div>
-            <div className="cardProduct-description"><span className="bold">Описание: </span>{props.description}</div>
-            <div className="cardProduct-price bold">{props.price+' ₽'}</div>
+            <div className="cardProduct-info">
+                <div className="cardProduct-title">{props.title}</div>
+                <div className="cardProduct-description">
+                    <span className="bold">Описание: </span>
+                    {props.description}
+                </div>
+                <div className="cardProduct-price">{props.price+' ₽'}</div>
+            </div>
+
         </div>
     )
 }
