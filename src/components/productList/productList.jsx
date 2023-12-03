@@ -38,18 +38,18 @@ function ProductList() {
     }
   
   return (
-    <div className="productList">
+    <section className="productList">
       {
         !load? 
         <Loader />
         :
-        products.products.length === 0 ? 
-        <div className="productList-isEmpty">
+        products.products?.length === 0 ? 
+        <figure className="productList-isEmpty">
           <img src={empty} alt="empty" />
-          <span className="productList-text">
+          <figcaption className="productList-text">
             В данный момент товары отсутствуют
-          </span>
-        </div>
+          </figcaption>
+        </figure>
         : 
         products.products && products.products.map((el,idx)=>(
           <CardProduct
@@ -60,7 +60,7 @@ function ProductList() {
           />
         ))
       }
-    </div>
+    </section>
   );
 }
 

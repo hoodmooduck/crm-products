@@ -8,8 +8,6 @@
   --blue-hover: #406fe9d9;
   --red: #F23C3C;
   --red-hover: #f23c3cd9;
-  
-
 }
 
 html, body, #root, .wrapper{
@@ -29,6 +27,8 @@ html, body, #root, .wrapper{
 }
 
 *{
+  outline: 0px;
+  border: 0px solid;
   margin: 0px;
   padding: 0px;
   font-family: "Inter";

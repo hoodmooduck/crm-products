@@ -18,24 +18,24 @@ interface cardPropsInterface {
 
 function CardProduct({props, changeProduct, deleteProduct}: cardPropsInterface) {
     return(
-        <div className='cardProduct'>
+        <article className='cardProduct'>
             <div className="cardProduct-controllButtonts">
-                <div onClick={changeProduct} className="cardProduct-change control-btn"></div>
-                <div onClick={deleteProduct} className="cardProduct-delete control-btn"></div>
+                <button onClick={changeProduct} className="cardProduct-change control-btn"></button>
+                <button onClick={deleteProduct} className="cardProduct-delete control-btn"></button>
             </div>
             <div className="cardProduct-img">
                 <img src={props.image !== '' ? props.image : noImg} alt={props.title} />
             </div>
             <div className="cardProduct-info">
-                <div className="cardProduct-title">{props.title}</div>
-                <div className="cardProduct-description">
+                <h2 className="cardProduct-title">{props.title}</h2>
+                <p className="cardProduct-description">
                     <span className="bold">Описание: </span>
                     {props.description}
-                </div>
-                <div className="cardProduct-price">{props.price+' ₽'}</div>
+                </p>
+                <p className="cardProduct-price">{props.price+' ₽'}</p>
             </div>
 
-        </div>
+        </article>
     )
 }
 

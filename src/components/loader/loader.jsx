@@ -7,9 +7,9 @@ function Loader() {
 
   
   return (
-    <div className="loader">
-        <span>Загрузка...</span>
-    </div>
+    <section className="loader">
+        <h2>Загрузка...</h2>
+    </section>
   );
 }
 

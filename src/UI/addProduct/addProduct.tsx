@@ -8,9 +8,9 @@ interface propsInterface {
 
 function AddProductButton({disabled, onClick, text}: propsInterface) {
     return(
-        <div onClick={disabled? ()=>{} : onClick} className={`${disabled ? 'button-UI__disabled' : 'button-UI'}`}>
-            <span className="button-UI_text">{text}</span>
-        </div>
+        <button onClick={disabled? ()=>{} : onClick} className={`${disabled ? 'button-UI__disabled' : 'button-UI'}`}>
+            <p className="button-UI_text">{text}</p>
+        </button>
     )
 }
 

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { isLoading, setProducts } from './getProducts.js';
 
 export const getAllProducts = () => {
-
   return async function(dispatch){
     dispatch(isLoading(false))
     try {
@@ -38,7 +37,6 @@ export const addProducts = (productData) => {
 };
 
 export const changeProducts = (productData) => {
-
   return async function(dispatch) {
     dispatch(isLoading(false))
     try {

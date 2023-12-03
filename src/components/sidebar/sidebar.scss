@@ -18,7 +18,6 @@
         width: 0px;
         height: 0px;
     }
-   
     &-form{
         display: flex;
         flex-direction: column;
@@ -36,13 +35,6 @@
         input:focus + label,input:valid + label, 
         textarea:focus + label,textarea:valid + label {
             transform: translateY(-25px);
-        }
-        input{
-            padding: 7px 5px;
-            border-radius: 3px;
-            border: 1px solid var(--buttonUI-disabled);
-            background: #FFF;
-            box-shadow: 2px 4px 4px 0px rgba(198, 189, 189, 0.25);
         }
     }
 
@@ -101,8 +93,19 @@
 
     }
     &-textarea{
+        border: 1px solid var(--buttonUI-disabled);
         width: 100%;
         resize: none;
         height: 168px;
+    }
+    &-error{
+        color: #F23C3C;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: absolute;
+        bottom: -15px;
+        font-weight: bold;
     }
 }

@@ -7,11 +7,10 @@ import { useSelector } from 'react-redux';
 
 function Compose() {
   return (
-    <div className="wrapper">
+    <main className="wrapper">
         <Sidebar />
         <ProductList />
-        
-    </div>
+    </main>
   );
 }
 
