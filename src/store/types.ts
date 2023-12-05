@@ -1,7 +1,20 @@
 export interface Product {
-    id: number;
+    id?: number;
     title: string;
     price: number;
     description: string;
-    image: string; 
-  }
+    image: File | null; 
+}
+
+export type InitialState = {
+  value: Product[],
+  selectProd: Product | null,
+  loading: boolean
+}
+
+export type Products = {
+  products: Product[] ,
+}
+export type Loading = {
+  products: number | null,
+}

@@ -4,26 +4,25 @@ import RemoveProductButton from '../../UI/removeProduct/removeProduct.tsx'
 import './sidebar.scss'
 // @ts-ignore
 import { addProducts, changeProducts, getAllProducts } from '../../store/api.js';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectProduct } from '../../store/getProducts.js';
-import Input from '../../UI/input/input.jsx';
+import Input from '../../UI/input/input.js';
+import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
+import { Product } from '../../store/types.ts';
 
 
 
 function Sidebar() {
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [errorValue, setErrorValue] = useState(-1)
-    const [description, setDescritption] = useState('')
-    const [validate, setValidtate] = useState(false)
-    const dispatch = useDispatch()
-    
+    const [name, setName] = useState<string>('')
+    const [price, setPrice] = useState<string>('')
+    const [errorValue, setErrorValue] = useState<number>(-1)
+    const [description, setDescritption] = useState<string>('')
+    const [validate, setValidtate] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
-    const [selectedFile, setSelectedFile] = useState(null);
-
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     
-    const productSelected = useSelector((state) => state.products.selectProd);
-    const productData_selected = {
+    const productSelected = useAppSelector((state) => state.products.selectProd);
+    const productData_selected : Product = {
         id: productSelected?.id,
         title: name,
         price: parseInt(price),
@@ -31,32 +30,29 @@ function Sidebar() {
         image: selectedFile
     }
 
-    const productData = {
+    const productData: Product = {
         title: name,
         price: parseInt(price),
         description: description,
         image: selectedFile
     }
-
     
-
-    
-    const handleFileInputChange = (e) => {
+    const handleFileInputChange = (e: ChangeEvent<any>) => {
         e.preventDefault()
         const file = e.target.files[0];
         setSelectedFile(file);
   
-      };
+    };
 
-    const changeName = (e) => {
+    const changeName = (e: ChangeEvent<any>): void => {
         setName(e.target.value)        
     }
 
-    const changePrice = (e) => {
+    const changePrice = (e: ChangeEvent<any>): void => {
         setPrice(e.target.value)
     }
 
-    const changeDescription = (e) => {
+    const changeDescription = (e: ChangeEvent<any>): void => {
         setDescritption(e.target.value)
     }
 
@@ -77,23 +73,23 @@ function Sidebar() {
             setName(productSelected.title)
             setDescritption(productSelected.description)
             setSelectedFile(null)
-            setPrice(productSelected.price)
+            setPrice((productSelected.price).toString())
         }
     },[productSelected])
-    function removeProduct(dis) {
+    function removeProduct(dis: any) {
         dis(changeProducts(productData_selected))
         resetProducts(dispatch)
         clearForm()
         selectProd(dispatch )
     }
-    function selectProd(dis) {
+    function selectProd(dis: any) {
         dis(selectProduct(null))
     }
-    function resetProducts(dis) {
+    function resetProducts(dis: any) {
         dis(getAllProducts())
         clearForm()
     }
-    function addProduct(dis) {
+    function addProduct(dis: any) {
         if(name !== ''){
             if(price !==''){
                 dis(addProducts(productData))
@@ -130,7 +126,7 @@ function Sidebar() {
                     <Input
                         onChange={changePrice}
                         value={price}
-                        type={'text'}
+                        type={'number'}
                         id={"sidebar-price"}
                         className={'sidebar-input'}
                     />
@@ -143,7 +139,7 @@ function Sidebar() {
                         type="file" 
                         id="sidebar-img" 
                     />
-                    <label htmlFor="sidebar-price">{selectedFile? selectedFile.name : 'Фото '}</label>
+                    <label htmlFor="sidebar-price">{selectedFile ? selectedFile.name : 'Фото '}</label>
                 </div>
                 <div className="sidebar-form__string">
                     <textarea 
