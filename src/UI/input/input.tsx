@@ -1,11 +1,12 @@
 
+import { ChangeEvent } from 'react';
 import './input.scss';
 
 type PropsInput = {
   id: string,
   value: string,
   type: string,
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   className: string,
 }
 

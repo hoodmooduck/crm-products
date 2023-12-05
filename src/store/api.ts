@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { isLoading, setProducts } from './getProducts.js';
 import { Dispatch } from 'react';
-import { Products } from './types.js';
+import { Product } from './types.js';
 
 export const getAllProducts = () => {
   return async function(dispatch: Dispatch<any>){
@@ -21,12 +21,11 @@ const headers = {
   "Content-Type": 'multipart/form-data'
 }
 
-export const addProducts = (productData: Products) => {
+export const addProducts = (productData: Product) => {
   return async function(dispatch: Dispatch<any>) {
     dispatch(isLoading(false))
     try {
       await axios.post('http://localhost:3030/api/products', productData, {headers});
-      dispatch(setProducts(productData));
       dispatch(isLoading(true))
     } catch (error: any) {
       console.error('\nошибка: ', error.message, ' \nкод: ', error.code);
@@ -35,12 +34,12 @@ export const addProducts = (productData: Products) => {
   }
 };
 
-export const changeProducts = (productData: Products) => {
+export const changeProducts = (productData: Product) => {
   return async function(dispatch: Dispatch<any>) {
     dispatch(isLoading(false))
     try {
       await axios.put('http://localhost:3030/api/products', productData, {headers});
-      dispatch(setProducts(productData));
+      console.log(productData);
       dispatch(isLoading(true))
     } catch (error: any) {
       console.error('\nошибка: ', error.message, ' \nкод: ', error.code);

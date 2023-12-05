@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import AddProductButton from '../../UI/addProduct/addProduct.tsx'
 import RemoveProductButton from '../../UI/removeProduct/removeProduct.tsx'
 import './sidebar.scss'
@@ -11,6 +11,8 @@ import { Product } from '../../store/types.ts';
 
 
 
+
+
 function Sidebar() {
     const [name, setName] = useState<string>('')
     const [price, setPrice] = useState<string>('')
@@ -18,6 +20,7 @@ function Sidebar() {
     const [description, setDescritption] = useState<string>('')
     const [validate, setValidtate] = useState<boolean>(false)
     const dispatch = useAppDispatch()
+
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     
@@ -27,7 +30,7 @@ function Sidebar() {
         title: name,
         price: parseInt(price),
         description: description,
-        image: selectedFile
+        image: selectedFile 
     }
 
     const productData: Product = {
@@ -37,22 +40,21 @@ function Sidebar() {
         image: selectedFile
     }
     
-    const handleFileInputChange = (e: ChangeEvent<any>) => {
+    const handleFileInputChange = (e: ChangeEvent<any>): void => {
         e.preventDefault()
         const file = e.target.files[0];
         setSelectedFile(file);
-  
     };
 
-    const changeName = (e: ChangeEvent<any>): void => {
+    const changeName = (e: ChangeEvent<HTMLInputElement>): void => {
         setName(e.target.value)        
     }
 
-    const changePrice = (e: ChangeEvent<any>): void => {
+    const changePrice = (e: ChangeEvent<HTMLInputElement>): void => {
         setPrice(e.target.value)
     }
 
-    const changeDescription = (e: ChangeEvent<any>): void => {
+    const changeDescription = (e: ChangeEvent<HTMLTextAreaElement>): void => {
         setDescritption(e.target.value)
     }
 
